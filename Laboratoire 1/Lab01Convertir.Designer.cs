@@ -84,7 +84,6 @@
             this.Gr01.Size = new System.Drawing.Size(758, 426);
             this.Gr01.TabIndex = 2;
             this.Gr01.TabStop = false;
-            this.Gr01.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // label4
             // 

@@ -1,4 +1,7 @@
-﻿using System;
+﻿//Maxime Simard
+//2020-08-31
+//Convertir Laboratoire 01
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -23,25 +26,17 @@ namespace Laboratoire_1
         {
             Application.Exit();
         }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnDecimal_Click(object sender, EventArgs e)
         {
             //Entrée
-            String Valeur = txtValeurAConvertir.Text;
-
-            
+            string Valeur = txtValeurAConvertir.Text;
             //Traitement
-            if(Valeur=="")
+            if(Valeur == "")
             {
-                Valeur = "0";
+                MessageBox.Show("Veuillez mettre une valeur");
+                return;
             }
-
-
+            MethodeDecimal(Valeur);
             //Sortie
             txtConDecimal.Text = Valeur;
         }
@@ -49,16 +44,15 @@ namespace Laboratoire_1
         private void btnHexadécimal_Click(object sender, EventArgs e)
         {
             //Entrée
-            String Valeur = txtValeurAConvertir.Text;
-
-
-            //Traitement
-            if (Valeur == "")
+            string Valeur = txtValeurAConvertir.Text;
+            //Traitement           
+            if(Valeur[0] != 0 && Valeur[1] != 'x' || Valeur == "")
             {
-                Valeur = "0";
+                MessageBox.Show("Veuillez mettre un 0x pour convertir un Hexadecimal ou veuillez mettre une valeur");
+                return;
             }
-            
-
+            Valeur.Remove(0,2);
+            MethodeHexaDecimal(Valeur);
             //Sortie
             txtConDecimal.Text = Valeur;
         }
@@ -66,18 +60,38 @@ namespace Laboratoire_1
         private void btnBinaire_Click(object sender, EventArgs e)
         {
             //Entrée
-            String Valeur = txtValeurAConvertir.Text;
-
-
-            //Traitement
-            if (Valeur == "")
+            string Valeur = txtValeurAConvertir.Text;
+            //traitement
+            if (Valeur[0] != 'b' || Valeur == "")
             {
-                Valeur = "0";
+                MessageBox.Show("Veuillez mettre un b pour convertir un Binaire ou veuillez mettre une valeur");
+                return;
             }
-
-
+            Valeur.Remove(0);
+            MethodeBinaire(Valeur);
             //Sortie
             txtConDecimal.Text = Valeur;
         }
+
+        private string MethodeDecimal (string Valeur)
+        {
+            int Resultat = Convert.ToInt32(Valeur);
+            string Decimal = Convert.ToString(Resultat,10);
+            return Decimal;
+        }
+        private string MethodeHexaDecimal(string Valeur)
+        {
+            int Resultat = Convert.ToInt32(Valeur);
+            string Hexadecimal = Convert.ToString(Resultat, 16);
+            return Hexadecimal;
+        }
+        private string MethodeBinaire(string Valeur)
+        {
+            int Resultat = Convert.ToInt32(Valeur);
+            string Binaire = Convert.ToString(Resultat, 2);
+            return Binaire;
+        }
+
+
     }
 }
